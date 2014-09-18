@@ -1,0 +1,81 @@
+/* Reset */
+canvas {
+    vertical-align: middle;
+}
+/* Global */
+.m0 {
+    margin: 0;
+}
+.mt0 {
+    margin-top: 0;
+}
+.mb0 {
+    margin-bottom: 0;
+}
+.mb10 {
+    margin-bottom: 10px;
+}
+.mb15 {
+    margin-bottom: 15px;
+}
+.p10 {
+    padding: 10px;
+}
+.box {
+    border: 1px solid #EEE;
+    padding: 15px;
+}
+/* Bootstrap */
+.navbar-white {
+    border-bottom-color: #EEE;
+    background-color: #FFF;
+    border-radius: 0;
+}
+.navbar-white .navbar-toggle {
+    border-color: #EEE;
+}
+.navbar-white .navbar-toggle .icon-bar {
+    background-color: #EEE;
+}
+.navbar-white .navbar-toggle:hover,
+.navbar-white .navbar-toggle:focus {
+    border-color: #CCC;
+}
+.navbar-white .navbar-toggle:hover .icon-bar,
+.navbar-white .navbar-toggle:focus .icon-bar {
+    background-color: #CCC;
+}
+.container-narrow {
+    max-width: 720px;
+}
+.navbar .avatar-xs {
+    margin: -5px 5px -5px 0;
+    border-radius: 3px;
+}
+.text-muted {
+    color: #999;
+}
+/* Jquery File Upload */
+.file-input {
+    position: relative;
+    overflow: hidden;
+}
+.file-input input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 200px;
+    direction: ltr;
+    cursor: pointer;
+}
+/* Fixes for IE < 8 */
+@media screen\9 {
+    .file-input input {
+        filter: alpha(opacity=0);
+        font-size: 100%;
+        height: 100%;
+    }
+}
