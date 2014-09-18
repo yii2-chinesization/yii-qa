@@ -17,7 +17,7 @@ class CommentSearch extends Comment
     public function rules()
     {
         return [
-            [['id', 'fid', 'tid', 'is_topic', 'authorId', 'view_count', 'comment_count', 'like_count', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'fid', 'tid', 'is_topic', 'author_id', 'view_count', 'comment_count', 'like_count', 'created_at', 'updated_at'], 'integer'],
             [['subject', 'content'], 'safe'],
         ];
     }
@@ -55,7 +55,7 @@ class CommentSearch extends Comment
             'fid' => $this->fid,
             'tid' => $this->tid,
             'is_topic' => $this->is_topic,
-            'authorId' => $this->authorId,
+            'author_id' => $this->author_id,
             'view_count' => $this->view_count,
             'comment_count' => $this->comment_count,
             'like_count' => $this->like_count,

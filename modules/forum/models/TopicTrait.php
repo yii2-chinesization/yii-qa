@@ -25,6 +25,7 @@ trait TopicTrait
      */
     public function getAuthor()
     {
-        return $this->hasOne(User::className(), ['id' => 'authorId']);
+        return $this->hasOne(User::className(), ['id' => 'author_id']);
     }
+
 }

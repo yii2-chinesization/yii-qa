@@ -33,7 +33,7 @@ class m140910_100300_initForumTable extends Migration
             'fid' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '版块ID'",
             'tid' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '所属话题.配合is_topic使用'",
             'is_topic' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0' COMMENT '是否话题,否则为话题评论'",
-            'authorId' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '作者ID'",
+            'author_id' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '作者ID'",
             'subject' => Schema::TYPE_STRING . " NOT NULL COMMENT '话题的主题'",
             'content' => Schema::TYPE_TEXT . " NOT NULL COMMENT '话题内容'",
             'view_count' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '查看数'",
@@ -83,7 +83,7 @@ class m140910_100300_initForumTable extends Migration
         $topic = new Topic();
         $topic->setAttributes([
             'fid' => $this->forumId,
-            'authorId' => 1,
+            'author_id' => 1,
             'subject' => '默认话题',
             'content' => '默认话题内容'
         ]);
@@ -104,7 +104,7 @@ class m140910_100300_initForumTable extends Migration
         echo PHP_EOL . '创建默认评论 ....' . PHP_EOL;
         $comment = new Comment();
         $comment->setAttributes([
-            'authorId' => 1,
+            'author_id' => 1,
             'content' => '默认评论内容'
         ]);
         $message = $this->topic->addComment($comment) ? '成功' : '失败';

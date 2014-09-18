@@ -163,7 +163,7 @@ class TopicController extends Controller
     {
         $model = new Comment;
         if ($model->load(Yii::$app->request->post())) {
-            $model->authorId = Yii::$app->user->id;
+            $model->author_id = Yii::$app->user->id;
             if ($topic->addComment($model)) {
                 $this->flash('发表评论成功!', 'success');
                 Yii::$app->end(0, $this->refresh());

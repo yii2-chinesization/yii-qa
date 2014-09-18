@@ -23,7 +23,7 @@ class Comment extends ActiveRecord
     public function rules()
     {
         return [
-            [['fid', 'tid', 'content', 'authorId'], 'required'],
+            [['fid', 'tid', 'content', 'author_id'], 'required'],
             [['is_topic'], 'default', 'value' => false],
             [['subject'], 'default', 'value' => '']
         ];

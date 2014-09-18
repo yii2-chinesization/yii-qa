@@ -14,7 +14,7 @@ class Topic extends ActiveRecord
     public function rules()
     {
         return [
-            [['fid', 'subject', 'content', 'authorId'], 'required'],
+            [['fid', 'subject', 'content', 'author_id'], 'required'],
             [['is_topic'], 'default', 'value' => 1]
         ];
     }
@@ -36,6 +36,16 @@ class Topic extends ActiveRecord
             return true;
         }
         return false;
+    }
+
+    public function addFavorite($uid)
+    {
+        $favorite = new Favorite();
+        $favorite->setAttributes([
+            'target_id' => $this->id,
+            'target_type' => 'forum_topic',
+        ]);
+
     }
 
     /**
