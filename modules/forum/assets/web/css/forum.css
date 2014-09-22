@@ -47,7 +47,7 @@
 }
 
 /* 话题详细页 */
-.topic-post, .topic-comment, .post-comment {
+.topic-post, .topic-comment, .topic-comment-post {
     margin-bottom: 20px;
     padding-bottom: 20px;
 }
@@ -95,9 +95,10 @@
        -moz-box-shadow: inset 0 1px 0 white, 0 1px 2px #e3e3e3;
             box-shadow: inset 0 1px 0 white, 0 1px 2px #e3e3e3;
 }
-
-.topic-like:hover, .topic-hate:hover, .topic-fav:hover {
+.topic-like:hover, .topic-hate:hover, .topic-fav:hover, .topic-like:focus, .topic-hate:focus, .topic-fav:focus {
     text-decoration: none;
+}
+.topic-like:hover, .topic-hate:hover, .topic-fav:hover, .topic-like.active, .topic-hate.active, .topic-fav.active {
     border-color: #CCC;
     color: #428bca;
 }
@@ -153,6 +154,7 @@
     margin-bottom: 2px;
 }
 
+/* markdown 编辑器 */
 .wmd-panel {
 }
 

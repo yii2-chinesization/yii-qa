@@ -1,5 +1,5 @@
 <?php
-use Yii;
+use \Yii;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use app\modules\forum\assets\ForumAsset;
@@ -12,17 +12,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Topics', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="topic-view">
-    <div class="topic-post">
-        <?= $this->render('_topic', [
-            'model' => $model
-        ]) ?>
-    </div>
-    <?= ListView::widget([
-        'summary' => false,
-        'dataProvider' => $commentDataProvider,
-        'options' => ['class' => 'topic-comments'],
-        'itemOptions' => ['class' => 'topic-comment'],
-        'itemView' => '_topic',
+    <?= $this->render('_topic', [
+        'models' => array_merge([$model], $model->comments)
     ]) ?>
     <?php if (!Yii::$app->user->getIsGuest()): ?>
         <?= $this->render('_comment', [

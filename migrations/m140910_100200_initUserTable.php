@@ -53,19 +53,19 @@ class m140910_100200_initUserTable extends Migration
         $this->createIndex('uid', $tableName, 'uid');
         $this->createIndex('sid', $tableName, 'sid');
 
-        //用户元数据表 (收藏, 赞, 踩...) 数据保存
+        //用户操作数据表 (收藏, 赞, 踩...) 数据保存
         $tableName = Meta::tableName();
         $this->createTable($tableName, [
             'id' => Schema::TYPE_PK,
             'uid' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '用户id'",
-            'name' => Schema::TYPE_STRING . " NOT NULL DEFAULT '' COMMENT '元数据名称'",
-            'value' => Schema::TYPE_STRING . " NOT NULL DEFAULT '' COMMENT '元数据的值'",
+            'type' => Schema::TYPE_STRING . " NOT NULL DEFAULT '' COMMENT '操作类型'",
+            'value' => Schema::TYPE_STRING . " NOT NULL DEFAULT '' COMMENT '操作类型值'",
             'target_id' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '目标id'",
             'target_type' => Schema::TYPE_STRING . " NOT NULL DEFAULT '' COMMENT '目标类型'",
             'created_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间'",
             'updated_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '修改时间'"
         ], $this->tableOptions);
-        $this->createIndex('name', $tableName, 'name');
+        $this->createIndex('type', $tableName, 'type');
         $this->createIndex('target_id', $tableName, 'target_id');
         $this->createIndex('target_type', $tableName, 'target_type');
 

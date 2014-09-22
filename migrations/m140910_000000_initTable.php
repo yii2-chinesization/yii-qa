@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\Schema;
+use yii\helpers\Console;
 use app\models\Config;
 use app\models\Storage;
 use app\components\db\Migration;
@@ -40,5 +41,19 @@ class m140910_000000_initTable extends Migration
     {
         $this->dropTable(Config::tableName());
         $this->dropTable(Storage::tableName());
+    }
+
+    public function dbInit()
+    {exit;
+        if (Yii::$app->db->dsn !== null) {
+            Yii::$app->db->open();
+            return;
+        }
+        echo PHP_EOL . '需要初始并生成数据库设置 ....' . PHP_EOL;
+        $dbHost = Console::prompt('请输入数据库地址', ['default' => 'localhost']);
+        $dbName = Console::prompt('请输入数据库名称(并确定数据库已建立)', ['default' => Yii::$app->name]);
+        $dbUsername = Console::prompt('请输入数据库账户名', ['default' => 'root']);
+        $dbPassword = Console::prompt('请输入数据库密码(默认为空)', ['default' => '']);
+        $dbPrefix = Console::prompt('请输入数据库表前缀', ['default' => 'pre_']);
     }
 }

@@ -11,7 +11,7 @@ $this->registerJs("
     });
 ");
 ?>
-<div class="post-comment clearfix">
+<div class="topic-comment-post clearfix">
     <h4>发表评论</h4>
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->errorSummary($model, [
