@@ -133,13 +133,14 @@ trait TopicTrait
                 'uid' => $uid,
                 'target_type' => static::TYPE
             ])->one();
-        $return = $active = false;
+        $contrary = $return = $active = false;
         if ($model) {
             $num = $model->delete();// 有记录(赞或踩)则取消记录
             if ($model->type == $type) { //相应记录删除后直接返回取消结果
                 $return = $num >= 0;
             } else {
                 $model = null; // 相对记录需清空查询结果已经生成相应的记录
+                $contrary = true;
             }
         }
         if (!$model) { //创建记录
@@ -156,9 +157,20 @@ trait TopicTrait
             }
         }
         if ($return == true) { // 更新记数
-            $this->updateCounters([ //更新版块统计
-                "{$type}_count" => $active ? 1 : -1
-            ]);
+            $attributeName1 = $type . '_count';
+            if ($contrary) {
+                $attributeName2 = ($type == 'like' ? 'hate' : 'like') . '_count';
+                $attributes = [
+                    $attributeName1 => $active ? 1 : ($this->$attributeName1 > 0 ? -1 :0),
+                    $attributeName2 => $active ? ($this->$attributeName2 > 0 ? -1 :0) : 1
+                ];
+            } else {
+                $attributes = [
+                    $attributeName1 => $active ? 1 : ($this->$attributeName1 > 0 ? -1 :0)
+                ];
+            }
+            //更新版块统计
+            $this->updateCounters($attributes);
         }
         return $return;
     }
