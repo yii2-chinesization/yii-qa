@@ -1,6 +1,7 @@
 <?php
 namespace app\modules\forum\models;
 
+use Yii;
 use yii\db\ActiveQuery;
 use app\components\db\ActiveRecord;
 
@@ -11,9 +12,13 @@ use app\components\db\ActiveRecord;
 class Comment extends ActiveRecord
 {
     /**
-     * 和Topic共用一个表
+     * 公用TopicTrait类
      */
     use TopicTrait;
+    /**
+     * 数据类型
+     */
+    const TYPE = 'forum_topic_comment';
 
     public static function find()
     {
@@ -23,9 +28,17 @@ class Comment extends ActiveRecord
     public function rules()
     {
         return [
-            [['fid', 'tid', 'content', 'authorId'], 'required'],
-            [['is_topic'], 'default', 'value' => false],
-            [['subject'], 'default', 'value' => '']
+            [['fid', 'tid', 'content', 'author_id'], 'required'],
+            [['subject'], 'default', 'value' => ''],
+            [['active'], 'boolean']
         ];
+    }
+
+    /**
+     * 获取话题
+     */
+    public function getTopic()
+    {
+        return $this->hasOne(Topic::className(), ['id' => 'tid']);
     }
 }

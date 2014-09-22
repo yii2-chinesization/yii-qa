@@ -63,7 +63,7 @@ class TopicSearch extends Topic
         $query->andFilterWhere(['like', 'subject', $this->subject])
             ->andFilterWhere(['like', 'content', $this->content])
             ->orderBy([
-                'is_topic' => SORT_DESC
+                'tid' => SORT_DESC
             ]);
 
         return $dataProvider;

@@ -9,5 +9,8 @@ return [
     'forum' => [
         'class' => 'app\modules\forum\Module',
     ],
+    'wechat' => [
+        'class' => 'app\modules\wechat\Module',
+    ],
 ]
 ?>

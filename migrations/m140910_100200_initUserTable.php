@@ -4,7 +4,8 @@ use yii\db\Schema;
 use yii\helpers\Console;
 use app\components\db\Migration;
 use app\modules\user\models\User;
-use app\modules\user\models\UserAvatar;
+use app\modules\user\models\Meta;
+use app\modules\user\models\Avatar;
 use app\modules\user\models\RegisterForm;
 
 class m140910_100200_initUserTable extends Migration
@@ -40,8 +41,8 @@ class m140910_100200_initUserTable extends Migration
         $this->generateFounderUser();
 
         //用户头像
-        $tableName = UserAvatar::tableName();
-        $this->createTable(UserAvatar::tableName(), [
+        $tableName = Avatar::tableName();
+        $this->createTable($tableName, [
             'id' => Schema::TYPE_PK,
             'uid' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '用户id'",
             'sid' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '图片存储id'",
@@ -51,12 +52,30 @@ class m140910_100200_initUserTable extends Migration
         ], $this->tableOptions);
         $this->createIndex('uid', $tableName, 'uid');
         $this->createIndex('sid', $tableName, 'sid');
+
+        //用户操作数据表 (收藏, 赞, 踩...) 数据保存
+        $tableName = Meta::tableName();
+        $this->createTable($tableName, [
+            'id' => Schema::TYPE_PK,
+            'uid' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '用户id'",
+            'type' => Schema::TYPE_STRING . " NOT NULL DEFAULT '' COMMENT '操作类型'",
+            'value' => Schema::TYPE_STRING . " NOT NULL DEFAULT '' COMMENT '操作类型值'",
+            'target_id' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '目标id'",
+            'target_type' => Schema::TYPE_STRING . " NOT NULL DEFAULT '' COMMENT '目标类型'",
+            'created_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间'",
+            'updated_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '修改时间'"
+        ], $this->tableOptions);
+        $this->createIndex('type', $tableName, 'type');
+        $this->createIndex('target_id', $tableName, 'target_id');
+        $this->createIndex('target_type', $tableName, 'target_type');
+
     }
 
     public function down()
     {
         $this->dropTable(User::tableName());
-        $this->dropTable(UserAvatar::tableName());
+        $this->dropTable(Avatar::tableName());
+        $this->dropTable(Meta::tableName());
     }
 
     /**

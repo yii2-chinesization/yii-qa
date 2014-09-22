@@ -76,7 +76,8 @@ class SiteController extends Controller
 
     public function actionTest()
     {
-        echo \yii\helpers\Markdown::process('**strong text***emphasized text*');exit;
+        $db = Yii::$app->db;
+//        echo \yii\helpers\Markdown::process('**strong text***emphasized text*');exit;
 //        echo Yii::getAlias('@yii/storage');
         return $this->render('test');
     }

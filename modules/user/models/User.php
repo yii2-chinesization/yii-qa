@@ -206,7 +206,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getAvatar()
     {
-        return $this->hasOne(UserAvatar::className(), ['uid' => 'id']);
+        return $this->hasOne(Avatar::className(), ['uid' => 'id']);
     }
 
     /**
@@ -216,7 +216,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function getAvatarUrl()
     {
         $avatar = $this->avatar;
-        return $avatar ? $avatar->getUrl() : UserAvatar::getDefaultUrl();
+        return $avatar ? $avatar->getUrl() : Avatar::getDefaultUrl();
     }
 
     /**

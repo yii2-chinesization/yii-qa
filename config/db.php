@@ -2,9 +2,9 @@
 
 return [
     'class' => 'app\components\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii-QA',
+    'dsn' => 'mysql:host=localhost;dbname=Yii',
     'username' => 'root',
-    'password' => 'root',
+    'password' => '',
     'tablePrefix' => 'pre_',
     'charset' => 'utf8',
 ];

@@ -21,7 +21,8 @@
         "yiisoft/yii2-authclient": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "callmez/yii2-storage": "*",
-        "bower-asset/pagedown": "*"
+        "bower-asset/pagedown": "*",
+        "npm-asset/art-template": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
