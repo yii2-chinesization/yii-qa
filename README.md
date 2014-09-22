@@ -17,6 +17,7 @@ Yii-QA
 - 打开命令行工具 -> 切换到程序根目录 -> 执行 ``php yii migrate`` 执行数据迁移命令导入数据结构
 
 执行截图如下:
+
 ![photo](https://cloud.githubusercontent.com/assets/1625891/4351508/2f1f60bc-420d-11e4-81a9-d2f0afdaed26.png)
 
 
