@@ -1,39 +1,51 @@
-Yii-QA
-======
+Yii-QA 简介
+===========
 
 感谢选择 Yii-QA, 基于[Yii2](https://github.com/yiisoft/yii2)框架基础实现的问答程序.
 
 
 环境条件
-------------
+-------
+简而言之：
+
 - >= php5.4
-- Yii2 
+- Yii2
 
-安装 Composer
-============
+>提示：详细的信息请在参考下个板块安装完Yii2后，检查http://localhost/<project-folder>/requirements.php 页面了解详情。
 
-###step 0:
+安装 via Composer
+----------------
+
+###预备工作:
 
 安装 Composer：下载[安装包(win)](https://getcomposer.org/Composer-Setup.exe), 或访问 [getcomposer.org 官网](http://getcomposer.org)。
 
-###step 1:
+###第一步:
 
-开启命令行，运行：
-```
- composer global require "fxp/composer-asset-plugin:1.0.*@dev"
+开启命令行，运行下列语句安装 Yii 需使用的 Composer Asset 开源插件：
+
+```console
+ composer global require "fxp/composer-asset-plugin:1.0.0-beta1"
 ```
 
-###step 2:
+###第二步:
+
 命令行切换到程序根目录并运行
+
+```console
+ composer install --prefer-dist
 ```
- composer install
-```
 
-100 thousands years passed.... 十万年之后……
+十万年之后……
 
-###step 3:
+>注意：如果遭遇到防火墙脑抽，或中国移不动，网不通的时候，可以使用宏大师搭建的墙内 Composer 镜像服务器，地址与使用请点击[Composer Proxy](http://composer-proxy.com/)。或歪果仁制作的商务加速服务[Toran Proxy中文版](http://pkg.phpcomposer.com/)
 
-注意哦，你有可能需要输入GitHub Username & password，如果你之前没存过的话。
+###额外:
+
+注意哦，如果你之前没存过的话，此时有可能需要你输入你的 GitHub Username & password。
+
+示例如下：
+
 ```console
 The credentials will be swapped for an OAuth token stored in C:/Users/qiansen138
 6/AppData/Roaming/Composer/auth.json, your password will not be stored
@@ -42,8 +54,7 @@ tions
 Username: *********
 Password:
 ```
-
-###依据提示，输入信息(Follow the instruction)
+依据网络状况不同，需耗时五百到十二亿五千万年……之后，就安装了 Yii2 所需全部的外围依赖库。
 
 程序初始化
 ------------
@@ -61,16 +72,16 @@ Password:
 ------------
 产品目前还是处于刚开发阶段.很多都未完善, 如果您对Yii2框架有兴趣,可以参考程序代码来学习Yii2.
 
-
-
 反馈或贡献代码
 ------------
-您可以在[这里](https://github.com/yii2-chinesization/yii-QA/issues)给我提出在使用中碰到的问题或Bug.
+您可以在[这里](https://github.com/yii2-chinesization/yii-QA/issues)给我们提出在使用中碰到的问题或Bug.
 
-我会在第一时间回复您并修复.
+本项目住持——CallMeZ大神承诺在第一时间回复您并修复。
 
-你也可以加QQ群: Yii2中国交流群[**343188481**]  Yii2-QA[**325243235**]参与讨论交流.
+你也可以发送邮件**callme-z@qq.com**给CallMeZ住持留言并且说明您的问题.
 
-或者发送邮件**callme-z@qq.com**给我并且说明您的问题. 
+如果你有更好代码实现,请 fork 此项目并发起您的 Pull-Request，我们会及时处理。感谢!
 
-如果你有更好代码实现,请fork项目并发起您的pull request.我会及时处理. 感谢!
+如果你有其他的好想法，也欢迎您加入这两个QQ群: Yii2中国交流群[**343188481**]  Yii2-QA[**325243235**]参与讨论交流。
+
+>额外啰嗦：如果您有关于 Yii2 的推广或视频教程制作方面的点子，欢迎加群或来信qiansen1386@gmail.com。祝搬砖快乐^_^
