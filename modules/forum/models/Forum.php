@@ -31,4 +31,23 @@ class Forum extends ActiveRecord
     {
         return $this->hasMany(Topic::className(), ['fid' => 'id']);
     }
+
+    /**
+     * 发表新帖
+     * @param Topic $topic
+     * @param bool $active 激活
+     * @return bool
+     */
+    public function addTopic(Topic $topic, $active = false)
+    {
+        $topic->setAttributes([
+            'fid' => $this->id,
+        ]);
+        $result = $topic->save();
+        if ($result) {
+            $active && $topic->toggleActive();
+            return true;
+        }
+        return false;
+    }
 }

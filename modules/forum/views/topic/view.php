@@ -17,11 +17,15 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
     <?= ListView::widget([
         'dataProvider' => $commentDataProvider,
-        'summary' => false,
         'itemView' => '_topic',
+        'summary' => false,
+        'emptyText' => '暂时还没有新的评论',
+        'emptyTextOptions' => [
+            'class' => 'text-center'
+        ]
     ]) ?>
     <?php if (!Yii::$app->user->getIsGuest()): ?>
-        <?= $this->render('_comment', [
+        <?= $this->render('_commentForm', [
             'model' => $comment
         ]) ?>
     <?php endif ?>

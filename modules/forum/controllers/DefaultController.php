@@ -4,11 +4,13 @@ namespace app\modules\forum\controllers;
 
 use Yii;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use app\components\Controller;
 use app\modules\forum\models\Forum;
 use app\modules\forum\models\ForumSearch;
+use app\modules\forum\models\Topic;
 use app\modules\forum\models\TopicSearch;
 
 /**
@@ -25,6 +27,23 @@ class DefaultController extends Controller
                     'delete' => ['post'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    // 默认只能Get方式查看版块页
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'view'],
+                        'verbs' => ['GET'],
+                    ],
+                    // 登录用户才能发表话题
+                    [
+                        'allow' => true,
+                        'actions' => ['post'],
+                        'roles' => ['@'],
+                    ]
+                ]
+            ]
         ];
     }
 
@@ -88,7 +107,10 @@ class DefaultController extends Controller
     public function actionPost($id)
     {
         $model = $this->findModel($id);
-        return $this->render('post');
+        return $this->render('post', [
+            'model' => $model,
+            'topic' => $this->newTopic($model)
+        ]);
     }
 
     /**
@@ -155,5 +177,23 @@ class DefaultController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * 创建新评论
+     * @param $topic
+     * @return Comment
+     */
+    protected function newTopic(Forum $forum)
+    {
+        $model = new Topic;
+        if ($model->load(Yii::$app->request->post())) {
+            $model->author_id = Yii::$app->user->id;
+            if ($forum->addTopic($model, true)) {
+                $this->flash('发表话题成功!', 'success');
+                Yii::$app->end(0, $this->redirect(['topic/view', 'id' => $model->id]));
+            }
+        }
+        return $model;
     }
 }

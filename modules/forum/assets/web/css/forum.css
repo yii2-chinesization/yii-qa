@@ -47,7 +47,7 @@
 }
 
 /* 话题详细页 */
-.topic, .topic-comment, .topic-comment-post {
+.topic, .topic-comment, .topic-comment-form {
     margin-bottom: 20px;
     padding-bottom: 20px;
 }

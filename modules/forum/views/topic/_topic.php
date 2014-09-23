@@ -89,7 +89,7 @@ $(document).on('click', '[data-do]', function(e){
                     var __this = $(this),
                         __do = __this.data('do'),
                         __id = __this.data('id');
-                    if (__id == _id) { // 同一个主题或评论触发
+                    if (__id == _id) { // 同一个话题或评论触发
                         __this.toggleClass('active', __do == _do);
 
                         var _num = __this.find('.num')

@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p><?= Html::encode($model->description) ?></p>
     <p>
         说点什么把?
-        <a href="/ask" class="btn btn-success">我要发表</a>
+        <a href="<?= Url::to(['post', 'id' => $model->id]) ?>" class="btn btn-success">我要发表</a>
     </p>
     <ul class="nav nav-tabs mb10">
         <?php $sort = Yii::$app->request->getQueryParam('sort') ?>
