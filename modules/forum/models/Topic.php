@@ -17,7 +17,7 @@ class Topic extends ActiveRecord
 
     public static function find()
     {
-        return new TopicQuery(get_called_class());
+        return (new TopicQuery(get_called_class()))->where(['tid' => 0]);
     }
 
     public function rules()
@@ -34,7 +34,7 @@ class Topic extends ActiveRecord
      */
     public function getComments()
     {
-        return $this->hasMany(Comment::className(), ['tid' => 'id']);
+        return $this->hasMany(Comment::className(), ['tid' => 'id'])->active();
     }
 
     /**

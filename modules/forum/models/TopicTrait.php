@@ -110,7 +110,7 @@ trait TopicTrait
     }
 
     /**
-     * 顶
+     * 赞
      * @param $uid
      * @return bool|string
      */
@@ -131,6 +131,7 @@ trait TopicTrait
             ->where(['or', ['type' => 'like'], ['type' => 'hate']])
             ->andWhere([
                 'uid' => $uid,
+                'target_id' => $this->id,
                 'target_type' => static::TYPE
             ])->one();
         $contrary = $return = $active = false;

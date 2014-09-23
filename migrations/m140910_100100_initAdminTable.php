@@ -17,7 +17,7 @@ class m140910_100100_initAdminTable extends Migration
 
     public function initMenu()
     {
-        echo PHP_EOL . '初始话后台菜单 ....' . PHP_EOL;
+        echo PHP_EOL . '初始化后台菜单 ....' . PHP_EOL;
 
         /* ============= 添加后台菜单 ============= */
         //用户
@@ -41,6 +41,6 @@ class m140910_100100_initAdminTable extends Migration
             'priority' => 20
         ]);
 
-        echo PHP_EOL . '初始话后台菜单完成' . PHP_EOL;
+        echo PHP_EOL . '初始化后台菜单完成' . PHP_EOL;
     }
 }

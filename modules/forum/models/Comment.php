@@ -22,7 +22,7 @@ class Comment extends ActiveRecord
 
     public static function find()
     {
-        return new CommentQuery(get_called_class());
+        return (new CommentQuery(get_called_class()))->where(['>', 'tid', 0]);
     }
 
     public function rules()

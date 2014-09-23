@@ -51,16 +51,17 @@ class ForumSearch extends Forum
             return $dataProvider;
         }
 
+
+
         $query->andFilterWhere([
-            'id' => $this->id,
-            'parent' => $this->parent,
-            'topic_count' => $this->topic_count,
-        ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
+                'id' => $this->id,
+                'parent' => $this->parent,
+                'topic_count' => $this->topic_count,
+            ])
+            ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'icon', $this->icon]);
-
+            ->andFilterWhere(['like', 'icon', $this->icon])
+            ->orderBy($order);
         return $dataProvider;
     }
 }

@@ -55,21 +55,6 @@ class TopicController extends Controller
         ];
     }
 
-//    /**
-//     * Lists all Topic models.
-//     * @return mixed
-//     */
-//    public function actionIndex()
-//    {
-//        $searchModel = new TopicSearch();
-//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-//
-//        return $this->render('index', [
-//            'searchModel' => $searchModel,
-//            'dataProvider' => $dataProvider,
-//        ]);
-//    }
-
     /**
      * Displays a single Topic model.
      * @param integer $id
@@ -77,7 +62,7 @@ class TopicController extends Controller
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id, function($model){
+        $model = $this->findModel($id, 'topic', function($model){
             $model->with([
                 'hate',
                 'like',
@@ -92,74 +77,14 @@ class TopicController extends Controller
                 'comments.author.avatar'
             ]);
         });
-        $comment = $this->newComment($model);
-//        $commentSearchModel = new CommentSearch();
-//        $commentDataProvider = $commentSearchModel->search(array_merge(Yii::$app->request->queryParams, [
-//            $commentSearchModel->formName() => [
-//                'tid' => $id
-//            ]
-//        ]));
-//        $commentDataProvider->query->with('author', 'author.avatar');
-
+        $request = Yii::$app->request;
+        $commentDataProvider = (new CommentSearch())->search($request->queryParams, $model->getComments()->active());
         return $this->render('view', [
             'model' => $model,
-//            'commentSearchModel' => $commentSearchModel,
-//            'commentDataProvider' => $commentDataProvider,
-            'comment' => $comment
+            'comment' => $this->newComment($model),
+            'commentDataProvider' => $commentDataProvider
         ]);
     }
-
-
-
-//    /**
-//     * Creates a new Topic model.
-//     * If creation is successful, the browser will be redirected to the 'view' page.
-//     * @return mixed
-//     */
-//    public function actionCreate()
-//    {
-//        $model = new Topic();
-//
-//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-//            return $this->redirect(['view', 'id' => $model->id]);
-//        } else {
-//            return $this->render('create', [
-//                'model' => $model,
-//            ]);
-//        }
-//    }
-
-//    /**
-//     * Updates an existing Topic model.
-//     * If update is successful, the browser will be redirected to the 'view' page.
-//     * @param integer $id
-//     * @return mixed
-//     */
-//    public function actionUpdate($id)
-//    {
-//        $model = $this->findModel($id);
-//
-//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-//            return $this->redirect(['view', 'id' => $model->id]);
-//        } else {
-//            return $this->render('update', [
-//                'model' => $model,
-//            ]);
-//        }
-//    }
-//
-//    /**
-//     * Deletes an existing Topic model.
-//     * If deletion is successful, the browser will be redirected to the 'index' page.
-//     * @param integer $id
-//     * @return mixed
-//     */
-//    public function actionDelete($id)
-//    {
-//        $this->findModel($id)->delete();
-//
-//        return $this->redirect(['index']);
-//    }
 
     /**
      * 收藏
@@ -168,7 +93,7 @@ class TopicController extends Controller
     public function actionApi()
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($request->post('id'));
+        $model = $this->findModel($request->post('id'), $request->post('type'));
         $opeartions = ['favorite', 'like', 'hate'];
         if (!in_array($do = $request->post('do'), $opeartions)) {
             return $this->message('错误的操作', 'error');
@@ -196,10 +121,11 @@ class TopicController extends Controller
      * @return Topic the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id, \Closure $func = null)
+    protected function findModel($id, $type = 'topic', \Closure $func = null)
     {
         if ($id) {
-            $model = Topic::find()->andWhere(['id' => $id])->active();
+            $model = $type == 'topic' ? Topic::find() : Comment::find();
+            $model->andWhere(['id' => $id])->active();
             $func !== null && $func($model);
             $model = $model->one();
             if ($model !== null) {
@@ -219,7 +145,7 @@ class TopicController extends Controller
         $model = new Comment;
         if ($model->load(Yii::$app->request->post())) {
             $model->author_id = Yii::$app->user->id;
-            if ($topic->addComment($model)) {
+            if ($topic->addComment($model, true)) {
                 $this->flash('发表评论成功!', 'success');
                 Yii::$app->end(0, $this->refresh());
             }

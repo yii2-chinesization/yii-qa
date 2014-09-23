@@ -26,4 +26,9 @@ class Forum extends ActiveRecord
             ],
         ];
     }
+
+    public function getTopics()
+    {
+        return $this->hasMany(Topic::className(), ['fid' => 'id']);
+    }
 }

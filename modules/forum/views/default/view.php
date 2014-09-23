@@ -1,8 +1,12 @@
 <?php
 
+use Yii;
+use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\bootstrap\Tabs;
 use yii\widgets\ListView;
 use yii\widgets\DetailView;
+use yii\data\ActiveDataProvider;
 use app\modules\forum\assets\ForumAsset;
 ForumAsset::register($this);
 
@@ -14,36 +18,22 @@ $this->params['breadcrumbs'][] = ['label' => 'Forums', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="forum-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <h3><?= Html::encode($model->name) ?></h3>
+    <p><?= Html::encode($model->description) ?></p>
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        说点什么把?
+        <a href="/ask" class="btn btn-success">我要发表</a>
     </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'parent',
-            'name',
-            'description:ntext',
-            'icon',
-            'topic_count',
-        ],
-    ]) ?>
-
+    <ul class="nav nav-tabs mb10">
+        <?php $sort = Yii::$app->request->getQueryParam('sort') ?>
+        <li <?php if (!in_array($sort, $sortArray)): ?>class="active"<?php endif ?>><a href="<?= Url::to(['', 'id' => $model->id]) ?>">最新的</a></li>
+        <li <?php if ($sort == 'hotest'): ?>class="active"<?php endif ?>><a href="<?= Url::to(['', 'id' => $model->id, 'sort' => 'hotest']) ?>">热门的</a></li>
+        <li <?php if ($sort == 'uncommented'): ?>class="active"<?php endif ?>><a href="<?= Url::to(['', 'id' => $model->id, 'sort' => 'uncommented']) ?>">未评论</a></li>
+    </ul>
     <?= ListView::widget([
         'dataProvider' => $topicDataProvider,
         'itemOptions' => ['class' => 'item'],
-        'itemView' => '_topicList',
+        'summary' => false,
+        'itemView' => '_topic',
     ]) ?>
-
 </div>

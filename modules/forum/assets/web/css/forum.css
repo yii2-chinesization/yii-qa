@@ -47,11 +47,11 @@
 }
 
 /* 话题详细页 */
-.topic-post, .topic-comment, .topic-comment-post {
+.topic, .topic-comment, .topic-comment-post {
     margin-bottom: 20px;
     padding-bottom: 20px;
 }
-.topic-post, .topic-comment {
+.topic, .topic-comment {
     border-bottom: 1px solid #DDD;
     position: relative;
 }

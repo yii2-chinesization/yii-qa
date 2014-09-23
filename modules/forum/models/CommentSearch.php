@@ -38,9 +38,9 @@ class CommentSearch extends Comment
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, CommentQuery $query = null)
     {
-        $query = Comment::find();
+        $query === null && $query = Comment::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -63,8 +63,7 @@ class CommentSearch extends Comment
         ]);
 
         $query->andFilterWhere(['like', 'subject', $this->subject])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->active();
+            ->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;
     }

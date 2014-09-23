@@ -19,7 +19,7 @@ class TopicSearch extends Topic
     {
         return [
             [['id', 'fid', 'comment_count', 'created_at', 'updated_at'], 'integer'],
-            [['subject', 'content'], 'safe'],
+            [['subject', 'content'], 'safe']
         ];
     }
 
@@ -39,13 +39,18 @@ class TopicSearch extends Topic
      *
      * @return ActiveDataProvider
      */
-    public function search($params, $active = true)
+    public function search($params, TopicQuery $query = null)
     {
-        $query = Topic::find();
+        $query === null && $query = Topic::find();
 
-        $active && $query->active();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC
+                ],
+                'attributes' => ['created_at']
+            ]
         ]);
 
         if (!($this->load($params) && $this->validate())) {
@@ -61,10 +66,7 @@ class TopicSearch extends Topic
         ]);
 
         $query->andFilterWhere(['like', 'subject', $this->subject])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->orderBy([
-                'tid' => SORT_DESC
-            ]);
+            ->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;
     }

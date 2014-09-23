@@ -4,6 +4,7 @@ namespace app\modules\forum\controllers;
 
 use Yii;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use app\components\Controller;
 use app\modules\forum\models\Forum;
@@ -28,8 +29,8 @@ class DefaultController extends Controller
     }
 
     /**
-     * Lists all Forum models.
-     * @return mixed
+     * 版块列表
+     * @return string
      */
     public function actionIndex()
     {
@@ -43,23 +44,51 @@ class DefaultController extends Controller
     }
 
     /**
-     * Displays a single Forum model.
-     * @param integer $id
-     * @return mixed
+     * 版块帖子列表
+     * @param $id
+     * @return string
      */
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $topicSearchModel = new TopicSearch();
-        $topicDataProvider = $topicSearchModel->search(Yii::$app->request->queryParams + [
-            $topicSearchModel->formName() => [
-                'fid' => $model->getPrimaryKey()
+        $topicDataProvider = (new TopicSearch())->search(Yii::$app->request->queryParams, $model->getTopics()->active());
+        $topicDataProvider->getSort()->attributes += [ // 增加(热门, 未评论)排序方式
+            'hotest' => [
+                'asc' => [
+                    'comment_count' => SORT_DESC,
+                    'created_at' => SORT_DESC
+                ],
+                'desc' => [
+                    'comment_count' => SORT_DESC,
+                    'created_at' => SORT_DESC
+                ]
+            ],
+            'uncommented' => [
+                'asc' => [
+                    'comment_count' => SORT_ASC,
+                    'created_at' => SORT_DESC
+                ],
+                'desc' => [
+                    'comment_count' => SORT_ASC,
+                    'created_at' => SORT_DESC
+                ]
             ]
-        ]);
+        ];
         return $this->render('view', [
             'model' => $model,
+            'sortArray' => ['hotest', 'uncommented'],
             'topicDataProvider' => $topicDataProvider
         ]);
+    }
+
+    /**
+     * 发布帖子
+     * @param $id
+     */
+    public function actionPost($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('post');
     }
 
     /**

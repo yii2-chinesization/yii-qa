@@ -13,7 +13,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="topic-view">
     <?= $this->render('_topic', [
-        'models' => array_merge([$model], $model->comments)
+        'model' => $model
+    ]) ?>
+    <?= ListView::widget([
+        'dataProvider' => $commentDataProvider,
+        'summary' => false,
+        'itemView' => '_topic',
     ]) ?>
     <?php if (!Yii::$app->user->getIsGuest()): ?>
         <?= $this->render('_comment', [
