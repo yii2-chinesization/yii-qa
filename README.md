@@ -13,36 +13,27 @@ Yii-QA 简介
 
 >提示：详细的信息请在参考下个板块安装完Yii2后，检查`http://localhost/<project-folder>/requirements.php` 页面了解详情。
 
-安装 Yii2 via Composer
+通过 Composer 安装依赖库
 ----------------
 
-###预备工作:
+####预备工作:
 
 安装 Composer：下载[安装包(win)](https://getcomposer.org/Composer-Setup.exe)，或访问 [getcomposer.org 官网](http://getcomposer.org)。
 
-###第一步:
+####安装 Yii2：
 
-开启命令行，运行下列语句安装 Yii 需使用的 Composer Asset 开源插件：
+开启命令行切换到程序根目录并运行，暂时需要先安装 Yii 所需的 Composer Asset 开源插件：
 
 ```console
  composer global require "fxp/composer-asset-plugin:1.0.0-beta1"
-```
-
-###第二步:
-
-命令行切换到程序根目录并运行
-
-```console
  composer install --prefer-dist
 ```
 
-十万年之后……
-
 >注意：如果遭遇到防火墙脑抽，或中国移不动，网不通的时候，可以使用宏大师搭建的墙内 Composer 镜像服务器，地址与使用请点击[Composer Proxy](http://composer-proxy.com/)。或歪果仁制作的商务加速服务[Toran Proxy中文版](http://pkg.phpcomposer.com/)
 
-###额外:
+####额外:
 
-注意哦，如果你之前没存过的话，此时有可能需要你输入你的 GitHub Username & password。
+如果你之前没存过的话，此时有可能需要你输入你的 GitHub Username & password。
 
 示例如下：
 
@@ -54,10 +45,12 @@ tions
 Username: *********
 Password:
 ```
-依据网络状况不同，需耗时五百到十二亿五千万年……之后，就安装了 Yii2 所需全部的外围依赖库。
+
+依据网络状况不同，需耗时几分钟到十二亿五千万年……然后就安装完成了包括 Yii2 在内的所有依赖库。
 
 程序本体的安装及初始化
 ------------
+
 安装步骤如下：
 - 【可选项】在您的数据库系统中新建一个数据库
 - 重命名 `protected/config/db-default.php` 文件 为 `db.php`，依据您的数据库配置相应地修改该文件。（请确认数据库已存在）
