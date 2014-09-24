@@ -15,7 +15,7 @@ class m140910_100300_initForumTable extends Migration
         $this->createTable($tableName, [
             'id' => Schema::TYPE_PK,
             'parent' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '父版块'",
-            'name' => Schema::TYPE_STRING . " NOT NULL COMMENT '版块名称'",
+            'name' => Schema::TYPE_STRING . "(100) NOT NULL COMMENT '版块名称'",
             'description' => Schema::TYPE_TEXT . " NOT NULL COMMENT '版块介绍'",
             'cover' => Schema::TYPE_STRING . " NOT NULL DEFAULT '' COMMENT '版块封面'",
             'icon' => Schema::TYPE_STRING . " NOT NULL DEFAULT '' COMMENT '版块图标'",

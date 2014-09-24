@@ -28,7 +28,7 @@ class m140910_100200_initUserTable extends Migration
 
             'avatar_sid' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '头像storage id'",
 
-            'status' => Schema::TYPE_SMALLINT . ' NOT NULL DEFAULT 10',
+            'status' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 10',
 
             'last_login_ip' => Schema::TYPE_STRING . "(32) NOT NULL DEFAULT '' COMMENT '最后登录IP'",
             'last_visit_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '最后访问时间'",
@@ -37,6 +37,7 @@ class m140910_100200_initUserTable extends Migration
         ], $this->tableOptions);
         $this->createIndex('username', $tableName, 'username', true);
         $this->createIndex('email', $tableName, 'email');
+        $this->createIndex('status', $tableName, 'status');
         $this->createIndex('created_at', $tableName, 'created_at');
         $this->generateFounderUser();
 
@@ -46,28 +47,28 @@ class m140910_100200_initUserTable extends Migration
             'id' => Schema::TYPE_PK,
             'uid' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '用户id'",
             'sid' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '图片存储id'",
-            'default' => Schema::TYPE_SMALLINT . " NOT NULL DEFAULT '0' COMMENT '是否默认头像'",
-            'status' => Schema::TYPE_SMALLINT . " NOT NULL DEFAULT '0' COMMENT '状态'",
+            'default' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0' COMMENT '是否默认头像'",
+            'status' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0' COMMENT '状态'",
             'created_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间'"
         ], $this->tableOptions);
         $this->createIndex('uid', $tableName, 'uid');
         $this->createIndex('sid', $tableName, 'sid');
+        $this->createIndex('status', $tableName, ['status', 'uid']);
+        $this->createIndex('default', $tableName, ['default', 'status', 'uid']);
 
         //用户操作数据表 (收藏, 赞, 踩...) 数据保存
         $tableName = Meta::tableName();
         $this->createTable($tableName, [
             'id' => Schema::TYPE_PK,
             'uid' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '用户id'",
-            'type' => Schema::TYPE_STRING . " NOT NULL DEFAULT '' COMMENT '操作类型'",
+            'type' => Schema::TYPE_STRING . "(100) NOT NULL DEFAULT '' COMMENT '操作类型'",
             'value' => Schema::TYPE_STRING . " NOT NULL DEFAULT '' COMMENT '操作类型值'",
             'target_id' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '目标id'",
-            'target_type' => Schema::TYPE_STRING . " NOT NULL DEFAULT '' COMMENT '目标类型'",
+            'target_type' => Schema::TYPE_STRING . "(100) NOT NULL DEFAULT '' COMMENT '目标类型'",
             'created_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间'",
-            'updated_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '修改时间'"
         ], $this->tableOptions);
-        $this->createIndex('type', $tableName, 'type');
-        $this->createIndex('target_id', $tableName, 'target_id');
-        $this->createIndex('target_type', $tableName, 'target_type');
+        $this->createIndex('item', $tableName, ['uid', 'type', 'target_id', 'target_type'], true);
+        $this->createIndex('target_type', $tableName, ['target_type', 'target_id']);
 
     }
 
