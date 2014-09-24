@@ -11,7 +11,7 @@ Yii-QA 简介
 - >= php5.4
 - Yii2
 
->提示：详细的信息请在参考下个板块安装完Yii2后，检查http://localhost/<project-folder>/requirements.php 页面了解详情。
+>提示：详细的信息请在参考下个板块安装完Yii2后，检查`http://localhost/<project-folder>/requirements.php` 页面了解详情。
 
 安装 Yii2 via Composer
 ----------------
