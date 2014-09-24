@@ -1,7 +1,8 @@
+# 保留所有 .gitignore 文件
 !.gitignore
 
 # 数据库文件
-config/db.php
+/config/db.php
 
 # phpstorm 项目文件
 .idea
@@ -19,8 +20,6 @@ Thumbs.db
 
 # composer 供应商目录
 /vendor
-# cubrid 安装目录
-/cubrid
 
 # composer 它本身是不需要的（客户端自行升级最新版）
 composer.phar
@@ -34,3 +33,10 @@ composer.phar
 phpunit.phar
 # 本地 phpunit 配置文件
 /phpunit.xml
+
+# 自动生成的文件无需提交
+/runtime
+/web/assets
+/modules/admin/assets
+/modules/forum/assets
+/modules/user/assets
