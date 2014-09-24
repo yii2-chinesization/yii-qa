@@ -1,7 +1,7 @@
 Yii-QA 简介
 ===========
 
-感谢选择 Yii-QA, 基于[Yii2](https://github.com/yiisoft/yii2)框架基础实现的问答程序.
+感谢选择 Yii-QA，基于[Yii2](https://github.com/yiisoft/yii2)框架基础实现的问答程序。
 
 
 环境条件
@@ -13,12 +13,12 @@ Yii-QA 简介
 
 >提示：详细的信息请在参考下个板块安装完Yii2后，检查http://localhost/<project-folder>/requirements.php 页面了解详情。
 
-安装 via Composer
+安装 Yii2 via Composer
 ----------------
 
 ###预备工作:
 
-安装 Composer：下载[安装包(win)](https://getcomposer.org/Composer-Setup.exe), 或访问 [getcomposer.org 官网](http://getcomposer.org)。
+安装 Composer：下载[安装包(win)](https://getcomposer.org/Composer-Setup.exe)，或访问 [getcomposer.org 官网](http://getcomposer.org)。
 
 ###第一步:
 
@@ -56,11 +56,12 @@ Password:
 ```
 依据网络状况不同，需耗时五百到十二亿五千万年……之后，就安装了 Yii2 所需全部的外围依赖库。
 
-程序初始化
+程序本体的安装及初始化
 ------------
-本程序基于命令行安装:
-- 编辑 ``protected/config/db.php'文件, 填入您的数据库配置, 请确认数据库存在.
-- 打开命令行工具 -> 切换到程序根目录.
+安装步骤如下：
+- 【可选项】在您的数据库系统中新建一个数据库
+- 重命名 `protected/config/db-default.php` 文件 为 `db.php`，依据您的数据库配置相应地修改该文件。（请确认数据库已存在）
+- 打开命令行工具 -> 切换到程序根目录
 - 在程序根目录中执行 ``php yii migrate`` 执行数据迁移命令导入数据结构
 
 执行截图如下:
@@ -70,15 +71,15 @@ Password:
 
 注意
 ------------
-产品目前还是处于刚开发阶段.很多都未完善, 如果您对Yii2框架有兴趣,可以参考程序代码来学习Yii2.
+产品目前还是处于刚开发阶段.很多都未完善，如果您对Yii2框架有兴趣,可以参考程序代码来学习Yii2。
 
 反馈或贡献代码
 ------------
-您可以在[这里](https://github.com/yii2-chinesization/yii-QA/issues)给我们提出在使用中碰到的问题或Bug.
+您可以在[这里](https://github.com/yii2-chinesization/yii-QA/issues)给我们提出在使用中碰到的问题或Bug。
 
 本项目住持——CallMeZ大神承诺在第一时间回复您并修复。
 
-你也可以发送邮件**callme-z@qq.com**给CallMeZ住持留言并且说明您的问题.
+你也可以发送邮件**callme-z@qq.com**给CallMeZ住持留言并且说明您的问题。
 
 如果你有更好代码实现,请 fork 此项目并发起您的 Pull-Request，我们会及时处理。感谢!
 
