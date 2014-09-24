@@ -10,6 +10,3 @@
 ## Vendor Conventions ##
 - ^runtime/
 - ^web/assets/
-- ^modules/admin/assets/
-- ^modules/forum/assets/
-- ^modules/user/assets/
