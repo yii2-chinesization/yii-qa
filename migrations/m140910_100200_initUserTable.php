@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Schema;
-use yii\helpers\Console;
+use app\helpers\Console;
 use app\components\db\Migration;
 use app\modules\user\models\User;
 use app\modules\user\models\Meta;
@@ -85,7 +85,8 @@ class m140910_100200_initUserTable extends Migration
     public function generateFounderUser()
     {
         $result = $this->saveUserData(new RegisterForm());
-        echo "创始人创建" . ($result ? '成功' : "失败, 请手动创建创始人用户") . PHP_EOL;
+        Console::output("创始人创建" . ($result ? '成功' : "失败, 请手动创建创始人用户"));
+
     }
 
     /**
@@ -103,11 +104,11 @@ class m140910_100200_initUserTable extends Migration
         $userForm->password = Console::prompt('请先创建创始人密码', ['default' => 'admin']);
 
         if (!($user = $userForm->register())) {
-            echo '输入数据验证错误:' . PHP_EOL;
+            Console::output('输入数据验证错误');
             foreach ($userForm->getErrors() as $k => $v) {
-                echo $k . ':' . PHP_EOL . implode(PHP_EOL, $v) . PHP_EOL;
+                Console::output($k . ':' . PHP_EOL . implode(PHP_EOL, $v));
             }
-            echo '请重新输入' . PHP_EOL;
+            Console::output('请重新输入');
             $this->saveUserData($user);
         }
         $user->setAttributes([ // 设置创始人信息

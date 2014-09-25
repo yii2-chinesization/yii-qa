@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\Schema;
+use app\helpers\Console;
 use app\components\db\Migration;
 use app\modules\admin\helpers\AdminHelper;
 
@@ -17,8 +18,7 @@ class m140910_100100_initAdminTable extends Migration
 
     public function initMenu()
     {
-        echo PHP_EOL . '初始化后台菜单 ....' . PHP_EOL;
-
+        Console::output('初始化后台菜单 ....');
         /* ============= 添加后台菜单 ============= */
         //用户
         AdminHelper::addMenu('user', ['/user/admin/user/index'], '用户管理', [
@@ -41,6 +41,6 @@ class m140910_100100_initAdminTable extends Migration
             'priority' => 20
         ]);
 
-        echo PHP_EOL . '初始化后台菜单完成' . PHP_EOL;
+        Console::output('初始化后台菜单完成 ....');
     }
 }

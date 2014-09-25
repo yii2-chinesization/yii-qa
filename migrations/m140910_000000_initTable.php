@@ -1,17 +1,18 @@
 <?php
 
 use yii\db\Schema;
-use yii\helpers\Console;
 use app\models\Tag;
 use app\models\TagData;
 use app\models\Config;
 use app\models\Storage;
+use app\helpers\Console;
 use app\components\db\Migration;
 
 class m140910_000000_initTable extends Migration
 {
     public function up()
     {
+        Console::prompt('请先创建创始人用户', ['default' => 'admin']);
         //初始化设置表
         $tableName = Config::tableName();
         $this->createTable($tableName, [
@@ -77,7 +78,7 @@ class m140910_000000_initTable extends Migration
             Yii::$app->db->open();
             return;
         }
-        echo PHP_EOL . '需要初始并生成数据库设置 ....' . PHP_EOL;
+        Console::output('需要初始并生成数据库设置 ....');
         $dbHost = Console::prompt('请输入数据库地址', ['default' => 'localhost']);
         $dbName = Console::prompt('请输入数据库名称(并确定数据库已建立)', ['default' => Yii::$app->name]);
         $dbUsername = Console::prompt('请输入数据库账户名', ['default' => 'root']);

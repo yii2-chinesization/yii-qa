@@ -1,5 +1,7 @@
 <?php
 
+use app\helpers\Console;
+
 require Yii::getAlias('@yii/rbac/migrations/m140506_102106_rbac_init.php');
 
 /**
@@ -39,8 +41,7 @@ class m140910_000001_initRbacTable extends m140506_102106_rbac_init
      */
     public function rbacInit()
     {
-        echo PHP_EOL . '初始化RBAC数据 ....' . PHP_EOL;
-
+        Console::output('初始化RBAC数据 ....');
         $auth = Yii::$app->authManager;
 
         /* ================= 权限 ================= */
@@ -68,6 +69,6 @@ class m140910_000001_initRbacTable extends m140506_102106_rbac_init
         $auth->add($founder);
         $auth->addChild($founder, $admin); // 创始人 > 管理员
 
-        echo PHP_EOL . '初始化RBAC数据完成' . PHP_EOL;
+        Console::output('初始化RBAC数据完成 ....');
     }
 }

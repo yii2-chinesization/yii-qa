@@ -57,9 +57,6 @@ Password:
 - 打开命令行工具 -> 切换到程序根目录
 - 在程序根目录中执行 ``php yii migrate`` 执行数据迁移命令导入数据结构
 
-
->警告：点击左上角图标，选择`属性`，检查默认代码页是否为`650001 (UTF-8)`，如果不是请参考 StackOverFlow 的此篇答案[修改注册表](http://stackoverflow.com/a/24711864)，重开命令行窗口，调整字体为Lucida Console，否则中文提示会有乱码。（如果您使用的是Windows欢迎各位将你们的系统信息，CMD的CodePage，字体的FontName等信息反馈到[此issue](https://github.com/yii2-chinesization/yii-QA/issues/7)）
-
 执行截图如下:
 
 ![photo](https://cloud.githubusercontent.com/assets/1625891/4351508/2f1f60bc-420d-11e4-81a9-d2f0afdaed26.png)

@@ -1,6 +1,7 @@
 <?php
 
 use yii\db\Schema;
+use app\helpers\Console;
 use app\components\db\Migration;
 use app\modules\forum\models\Forum;
 use app\modules\forum\models\Topic;
@@ -59,7 +60,7 @@ class m140910_100300_initForumTable extends Migration
     public $forumId;
     public function forumInit()
     {
-        echo PHP_EOL . '创建默认版块 ....' . PHP_EOL;
+        Console::output('创建默认版块 ....');
         $forum = new Forum();
         $forum->setAttributes([
             'name' => '默认版块',
@@ -71,17 +72,17 @@ class m140910_100300_initForumTable extends Migration
         } else {
             $message = '失败';
         }
-        echo PHP_EOL . '创建默认版块' . $message . PHP_EOL;
+        Console::output('创建默认版块' . $message);
     }
 
     public $topic;
     public function topicInit()
     {
         if ($this->forumId === null) {
-            echo PHP_EOL . '无法创建默认话题,因为没有默认归属版块 ....' . PHP_EOL;
+            Console::output('无法创建默认话题,因为没有默认归属版块 ....');
             return;
         }
-        echo PHP_EOL . '创建默认话题 ....' . PHP_EOL;
+        Console::output('创建默认话题 ....');
         $topic = new Topic();
         $topic->setAttributes([
             'fid' => $this->forumId,
@@ -96,7 +97,7 @@ class m140910_100300_initForumTable extends Migration
         } else {
             $message = '失败';
         }
-        echo PHP_EOL . '创建默认话题' . $message . PHP_EOL;
+        Console::output('创建默认话题' . $message);
     }
 
     public function commentInit()
@@ -104,7 +105,7 @@ class m140910_100300_initForumTable extends Migration
         if (!$this->topic) {
             return;
         }
-        echo PHP_EOL . '创建默认评论 ....' . PHP_EOL;
+        Console::output('创建默认评论 ....');
         $comment = new Comment();
         $comment->setAttributes([
             'author_id' => 1,
@@ -112,6 +113,6 @@ class m140910_100300_initForumTable extends Migration
         ]);
 
         $message = $this->topic->addComment($comment, true) ? '成功' : '失败';
-        echo PHP_EOL . '创建默认评论' . $message . PHP_EOL;
+        Console::output('创建默认评论' . $message);
     }
 }
