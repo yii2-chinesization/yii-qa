@@ -12,7 +12,6 @@ class m140910_000000_initTable extends Migration
 {
     public function up()
     {
-        Console::prompt('请先创建创始人用户', ['default' => 'admin']);
         //初始化设置表
         $tableName = Config::tableName();
         $this->createTable($tableName, [
