@@ -21,7 +21,7 @@ Yii-QA 简介
 
 ####安装 Yii-qa：
 
-开启命令行切换到程序根目录并运行，暂时需要先安装 Yii 所需的 Composer Asset 开源插件：
+开启命令行切换到程序根目录并依次运行以下两条命令：
 
 ```console
  composer global require "fxp/composer-asset-plugin:1.0.0-beta1"
