@@ -27,7 +27,6 @@
         "issues": "https://github.com/yii2-chinesization/yii-qa/issues?state=open",
         "forum": "http://www.yiichina.com/topic/",
         "wiki": "https://github.com/yii2-chinesization/yii-qa/wiki/",
-        "irc": "http://jq.qq.com/?_wv=1027&k=Q1JIAt",
         "source": "https://github.com/yii2-chinesization/yii-qa/"
     },
     "minimum-stability": "dev",
