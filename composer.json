@@ -1,14 +1,14 @@
 {
-    "name": "yii2-chinesization/yii-QA",
+    "name": "yii2-chinesization/yii-qa",
     "description": "基于 Yii2 实现的问答系统",
     "version ": "0.1.11-dev",
     "keywords": [
         "yii2",
         "WebApp",
-        "Q&A",
+        "Social-question-and-answer",
         "StackOverFlow-like"
     ],
-    "homepage": "https://github.com/yii2-chinesization/yii-QA/",
+    "homepage": "https://github.com/yii2-chinesization/yii-qa/",
     "type": "project",
     "license": "BSD-3-Clause",
     "authors": [
@@ -24,11 +24,10 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/yii2-chinesization/yii-QA/issues?state=open",
+        "issues": "https://github.com/yii2-chinesization/yii-qa/issues?state=open",
         "forum": "http://www.yiichina.com/topic/",
-        "wiki": "https://github.com/yii2-chinesization/yii-QA/wiki/",
-        "irc": "http://jq.qq.com/?_wv=1027&k=Q1JIAt",
-        "source": "https://github.com/yii2-chinesization/yii-QA/"
+        "wiki": "https://github.com/yii2-chinesization/yii-qa/wiki/",
+        "source": "https://github.com/yii2-chinesization/yii-qa/"
     },
     "minimum-stability": "dev",
     "require": {
