@@ -2,10 +2,23 @@
 namespace app\modules\forum\models;
 
 use Yii;
+use app\models\TagItem;
 use app\components\db\ActiveRecord;
 
 class Topic extends ActiveRecord
 {
+    /**
+     * 审核通过
+     */
+    const STATUS_ACTIVE = 1;
+    /**
+     * 审核
+     */
+    const STATUS_AUDIT = 0;
+    /**
+     * 已删除
+     */
+    const STATUS_DELETED = -1;
     /**
      * 公用TopicTrait类
      */
@@ -24,7 +37,7 @@ class Topic extends ActiveRecord
     {
         return [
             [['fid', 'subject', 'content', 'author_id'], 'required'],
-            [['active'], 'boolean']
+            [['status'], 'in', 'range' => [static::STATUS_ACTIVE, static::STATUS_AUDIT, static::STATUS_DELETED]]
         ];
     }
 
@@ -34,7 +47,7 @@ class Topic extends ActiveRecord
      */
     public function getComments()
     {
-        return $this->hasMany(Comment::className(), ['tid' => 'id'])->active();
+        return $this->hasMany(Comment::className(), ['tid' => 'id']);
     }
 
     /**
@@ -51,9 +64,32 @@ class Topic extends ActiveRecord
         ]);
         $result = $comment->save();
         if ($result) {
-            $active && $comment->toggleActive();
+            $active && $comment->setActive();
             return true;
         }
         return false;
+    }
+
+    /**
+     * 添加标签
+     * @param array $tags
+     * @return bool
+     */
+    public function addTags(array $tags)
+    {
+        $return = false;
+        $tagItem = new TagItem();
+        foreach ($tags as $tag) {
+            $_tagItem = clone $tagItem;
+            $_tagItem->setAttributes([
+                'tid' => $tag->id,
+                'target_id' => $this->id,
+                'target_type' => static::TYPE
+            ]);
+            if ($_tagItem->save() && $return == false) {
+                $return = true;
+            }
+        }
+        return $return;
     }
 }

@@ -12,6 +12,19 @@ use app\components\db\ActiveRecord;
 class Comment extends ActiveRecord
 {
     /**
+     * 审核通过
+     */
+    const STATUS_ACTIVE = 1;
+    /**
+     * 审核
+     */
+    const STATUS_AUDIT = 0;
+    /**
+     * 已删除
+     */
+    const STATUS_DELETED = -1;
+
+    /**
      * 公用TopicTrait类
      */
     use TopicTrait;
@@ -22,7 +35,7 @@ class Comment extends ActiveRecord
 
     public static function find()
     {
-        return (new CommentQuery(get_called_class()))->where(['>', 'tid', 0]);
+        return (new CommentQuery(get_called_class()))->andWhere(['>', 'tid', 0]);
     }
 
     public function rules()
@@ -30,7 +43,7 @@ class Comment extends ActiveRecord
         return [
             [['fid', 'tid', 'content', 'author_id'], 'required'],
             [['subject'], 'default', 'value' => ''],
-            [['active'], 'boolean']
+            [['status'], 'in', 'range' => [static::STATUS_ACTIVE, static::STATUS_AUDIT, static::STATUS_DELETED]]
         ];
     }
 

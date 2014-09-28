@@ -2,6 +2,7 @@
 
 namespace app\modules\forum\controllers;
 
+use app\models\Tag;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -107,9 +108,10 @@ class DefaultController extends Controller
     public function actionPost($id)
     {
         $model = $this->findModel($id);
+        $topic = $this->newTopic($model);
         return $this->render('post', [
             'model' => $model,
-            'topic' => $this->newTopic($model)
+            'topic' => $topic
         ]);
     }
 
@@ -140,7 +142,6 @@ class DefaultController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -187,12 +188,34 @@ class DefaultController extends Controller
     protected function newTopic(Forum $forum)
     {
         $model = new Topic;
-        if ($model->load(Yii::$app->request->post())) {
+        $request = Yii::$app->request;
+        if ($model->load($request->post())) {
             $model->author_id = Yii::$app->user->id;
             if ($forum->addTopic($model, true)) {
+                if ($tagId = $request->post('tags')) {
+                    $tags = Tag::find()->where([
+                        'name' => explode(',', $tagId)
+                    ])->active()->all();
+                    $model->addTags($tags);
+                }
                 $this->flash('发表话题成功!', 'success');
                 Yii::$app->end(0, $this->redirect(['topic/view', 'id' => $model->id]));
             }
+        }
+        return $model;
+    }
+
+    /**
+     * 添加标签
+     * @param Topic $topic
+     * @return Tag
+     */
+    protected function addTags(Topic $topic)
+    {
+        $model = new Tag;
+        $tags = Yii::$app->request->post('tags');
+        if ($tags) {
+
         }
         return $model;
     }

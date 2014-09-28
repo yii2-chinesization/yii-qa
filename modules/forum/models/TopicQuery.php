@@ -7,7 +7,7 @@ class TopicQuery extends ActiveQuery
 {
     public function active()
     {
-        $this->andWhere(['active' => 1]);
+        $this->andWhere(['status' => Topic::STATUS_ACTIVE]);
         return $this;
     }
 }

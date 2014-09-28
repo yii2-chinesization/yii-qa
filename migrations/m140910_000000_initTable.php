@@ -2,7 +2,7 @@
 
 use yii\db\Schema;
 use app\models\Tag;
-use app\models\TagData;
+use app\models\TagItem;
 use app\models\Config;
 use app\models\Storage;
 use app\helpers\Console;
@@ -53,15 +53,15 @@ class m140910_000000_initTable extends Migration
         $this->createIndex('status', $tableName, ['status', 'id']);
 
         //标签数据表
-        $tableName = TagData::tableName();
+        $tableName = TagItem::tableName();
         $this->createTable($tableName, [
             'id' => Schema::TYPE_PK,
-            'tag_id' => Schema::TYPE_STRING . "(64) NOT NULL COMMENT '标签名'",
+            'tid' => Schema::TYPE_STRING . "(64) NOT NULL COMMENT '标签id'",
             'target_id' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '目标id'",
             'target_type' => Schema::TYPE_STRING . "(100) NOT NULL DEFAULT '' COMMENT '目标类型'",
             'created_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间'"
         ]);
-        $this->createIndex('item', $tableName, ['tag_id', 'target_id', 'target_type'], true);
+        $this->createIndex('item', $tableName, ['tid', 'target_id', 'target_type'], true);
         $this->createIndex('target_type', $tableName, ['target_type', 'target_id']);
     }
 

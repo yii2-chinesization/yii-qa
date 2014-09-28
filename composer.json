@@ -41,6 +41,7 @@
         "callmez/yii2-storage": "*",
         "bower-asset/adminlte": "*",
         "bower-asset/pagedown": "*",
+        "bower-asset/selectize": "*",
         "npm-asset/art-template": "*"
     },
     "require-dev": {

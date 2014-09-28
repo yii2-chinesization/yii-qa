@@ -3,17 +3,17 @@ namespace app\models;
 
 use app\components\db\ActiveRecord;
 
-class TagData extends ActiveRecord
+class TagItem extends ActiveRecord
 {
     public static function tableName()
     {
-        return '{{%tag_data}}';
+        return '{{%tag_item}}';
     }
 
     public function rules()
     {
         return [
-            [['name'], 'required']
+            [['tid', 'target_id', 'target_type'], 'required']
         ];
     }
 

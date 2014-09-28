@@ -62,23 +62,19 @@ class TopicController extends Controller
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id, 'topic', function($model){
-            $model->with([
-                'hate',
-                'like',
-                'favorite',
-                'author',
-                'author.avatar',
-                'comments',
-                'comments.hate',
-                'comments.like',
-                'comments.favorite',
-                'comments.author',
-                'comments.author.avatar'
-            ]);
+        $with = [
+            'hate',
+            'like',
+            'favorite',
+            'author',
+            'author.avatar'
+        ];
+        $model = $this->findModel($id, 'topic', function ($model) use ($with){
+            $model->with($with);
         });
         $request = Yii::$app->request;
-        $commentDataProvider = (new CommentSearch())->search($request->queryParams, $model->getComments()->active());
+        $commentDataProvider = (new CommentSearch())->search($request->queryParams, $model->getComments());
+        $commentDataProvider->query->with($with)->active();
         return $this->render('view', [
             'model' => $model,
             'comment' => $this->newComment($model),
@@ -87,7 +83,7 @@ class TopicController extends Controller
     }
 
     /**
-     * 收藏
+     * 收藏, 赞, 踩, 标签 接口
      * @param $id
      */
     public function actionApi()

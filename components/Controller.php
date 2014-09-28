@@ -2,6 +2,7 @@
 namespace app\components;
 
 use Yii;
+use yii\helpers\Url;
 use yii\web\Response;
 
 class Controller extends \yii\web\Controller
@@ -24,23 +25,20 @@ class Controller extends \yii\web\Controller
     /**
      * @param $message 信息显示内容
      * @param string $type 信息显示类型, ['info', 'success', 'error', 'warning']
-     * @param null $url 跳转地址
+     * @param null $redirect 跳转地址
      * @param null $resultType 信息显示格式
      * @return array|string
      */
-    public function message($message, $type = 'info', $url = null, $resultType = null)
+    public function message($message, $type = 'info', $redirect = null, $resultType = null)
     {
-        if ($resultType === null) {
-            $resultType = Yii::$app->getRequest()->getIsAjax() ? 'json' : 'html';
-        }
-        if ($type === null) {
-            $data = $message;
-        } else {
-            $data = [
-                'type' => $type,
-                'message' => $message
-            ];
-        }
+        $resultType === null && $resultType = Yii::$app->getRequest()->getIsAjax() ? 'json' : 'html';
+        is_array($redirect) && $redirect = Url::to($redirect);
+        $data = [
+            'type' => $type,
+            'message' => $message,
+            'redirect' => $redirect
+        ];
+
         if ($resultType === 'json') {
             Yii::$app->getResponse()->format = Response::FORMAT_JSON;
             return $data;

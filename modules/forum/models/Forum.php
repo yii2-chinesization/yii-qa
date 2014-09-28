@@ -45,7 +45,7 @@ class Forum extends ActiveRecord
         ]);
         $result = $topic->save();
         if ($result) {
-            $active && $topic->toggleActive();
+            $active && $topic->setActive();
             return true;
         }
         return false;

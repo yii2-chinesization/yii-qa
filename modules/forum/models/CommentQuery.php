@@ -7,7 +7,7 @@ class CommentQuery extends ActiveQuery
 {
     public function active()
     {
-        $this->andWhere(['active' => 1]);
+        $this->andWhere(['status' => Comment::STATUS_ACTIVE]);
         return $this;
     }
 }

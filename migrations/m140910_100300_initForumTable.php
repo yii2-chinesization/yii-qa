@@ -33,7 +33,6 @@ class m140910_100300_initForumTable extends Migration
             'id' => Schema::TYPE_PK,
             'fid' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '版块ID'",
             'tid' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '所属话题ID.默认为0, 表示为话题,否则为评论'",
-            'active' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0' COMMENT '是否话题,否则为话题评论'",
             'author_id' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '作者ID'",
             'subject' => Schema::TYPE_STRING . " NOT NULL COMMENT '话题的主题'",
             'content' => Schema::TYPE_TEXT . " NOT NULL COMMENT '话题内容'",
@@ -42,6 +41,7 @@ class m140910_100300_initForumTable extends Migration
             'favorite_count' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '收藏数'",
             'like_count' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '喜欢数'",
             'hate_count' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '讨厌数'",
+            'status' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0' COMMENT 'status'",
             'created_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间'",
             'updated_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '修改时间'",
         ]);
@@ -91,7 +91,7 @@ class m140910_100300_initForumTable extends Migration
             'content' => '默认话题内容'
         ]);
         if ($topic->save()) {
-            $topic->toggleActive(); //激活
+            $topic->setActive(); //激活
             $message = '成功';
             $this->topic = $topic;
         } else {

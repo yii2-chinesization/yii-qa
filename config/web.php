@@ -56,13 +56,13 @@ $config = [
 //            'clients' => [
 //                'weibo' => [
 //                    'class' => 'app\modules\user\components\authclient\clients\WeiBo',
-//                    'clientId' => 'xxx',
-//                    'clientSecret' => 'xxx',
+//                    'clientId' => '991747086',
+//                    'clientSecret' => '61ee61c2e2b2d0ad9bb4024e87478d59',
 //                ],
 //                'qq' => [
 //                    'class' => 'app\modules\user\components\authclient\clients\QQ',
-//                    'clientId' => 'xxx',
-//                    'clientSecret' => 'xxx',
+//                    'clientId' => '101119657',
+//                    'clientSecret' => 'b7dd03879ee20c0c209f678db2d0d1fa',
 //                ],
 //            ],
 //        ],
@@ -73,16 +73,16 @@ $config = [
                 'qiniu' => [
                     'class' => 'yii\storage\bin\QiniuStorage',
                     'bucket' => 'records',
-                    'accessKey' => 'xxx',
-                    'secretKey' => 'xxx'
+                    'accessKey' => 'pn6VrDeikA7cbU-cSjH6_1XGKaERXcHKBMgb5k9L',
+                    'secretKey' => 'ovSuXqHBHHESKo2goAD1HXgS68ag4Di_NZDZep_h'
                 ]
             ]
         ],
         'db' => $db,
         'wechat' => [
             'class' => 'yii\wechat\sdk\Wechat',
-            'appId' => 'xxx',
-            'appSecret' => 'xxx',
+            'appId' => 'wxcb80aa7944a936e0',
+            'appSecret' => '9512b97b84615a81d554f211761e4a4b',
             'token' => '123'
         ]
     ],

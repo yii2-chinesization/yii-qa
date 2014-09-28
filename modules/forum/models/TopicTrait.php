@@ -207,13 +207,12 @@ trait TopicTrait
     }
 
     /**
-     * 激活
+     * 审核通过
      * @return bool
      */
-    public function toggleActive()
+    public function setActive()
     {
-        $active = $this->active ? 0 : 1;
-        if ($result = $this->updateAttributes(['active' => $active])) {
+        if (($this->status != static::STATUS_ACTIVE) && $this->updateAttributes(['status' => static::STATUS_ACTIVE])) {
             if (static::TYPE === Topic::TYPE) {
                 $model = $this->forum;
                 $attribute = 'topic_count';
@@ -222,9 +221,9 @@ trait TopicTrait
                 $attribute = 'comment_count';
             }
             $model->updateCounters([ //更新版块统计
-                $attribute => $active ? 1 : -1
+                $attribute => 1
             ]);
         }
-        return $result >= 0;
+        return true;
     }
 }

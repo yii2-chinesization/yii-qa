@@ -39,9 +39,9 @@ class TopicSearch extends Topic
      *
      * @return ActiveDataProvider
      */
-    public function search($params, TopicQuery $query = null)
+    public function search($params)
     {
-        $query === null && $query = Topic::find();
+        $query = Topic::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
