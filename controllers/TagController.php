@@ -98,9 +98,12 @@ class TagController extends Controller
     {
         $model = new Tag();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->setActive();
-            return $this->message('标签创建成功', 'success', ['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if ($result = $model->save()) {
+                $model->setActive();
+                return $this->message('标签创建成功', 'success', ['view', 'id' => $model->id]);
+            }
+            return $this->message(array_values($model->getFirstErrors())[0], 'error');
         } else {
 //            return $this->render('create', [
 //                'model' => $model,

@@ -28,4 +28,9 @@ class TagItem extends ActiveRecord
             ],
         ];
     }
+
+    public function getTag()
+    {
+        return $this->hasOne(Tag::className(), ['tid' => 'id']);
+    }
 }

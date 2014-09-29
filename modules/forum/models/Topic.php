@@ -2,6 +2,7 @@
 namespace app\modules\forum\models;
 
 use Yii;
+use app\models\Tag;
 use app\models\TagItem;
 use app\components\db\ActiveRecord;
 
@@ -68,6 +69,28 @@ class Topic extends ActiveRecord
             return true;
         }
         return false;
+    }
+
+    /**
+     * 获取帖子标签
+     * @return mixed
+     */
+    public function getTags()
+    {
+        return $this->hasMany(Tag::className(), ['id' => 'id'])
+            ->viaTable(TagItem::tableName(), ['target_id' => 'id'], function($model) {
+                $model->andWhere(['target_type' => static::TYPE]);
+            });
+    }
+
+    /**
+     * 获取帖子标签记录
+     * @return mixed
+     */
+    public function getTagItems()
+    {
+        return $this->hasMany(TagItem::className(), ['target_id' => 'id'])
+            ->andWhere(['target_type' => static::TYPE]);
     }
 
     /**

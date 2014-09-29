@@ -70,7 +70,7 @@ class TopicController extends Controller
             'author.avatar'
         ];
         $model = $this->findModel($id, 'topic', function ($model) use ($with){
-            $model->with($with);
+            $model->with(array_merge($with, ['tags']));
         });
         $request = Yii::$app->request;
         $commentDataProvider = (new CommentSearch())->search($request->queryParams, $model->getComments());

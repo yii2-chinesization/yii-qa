@@ -49,7 +49,7 @@ class m140910_000000_initTable extends Migration
             'created_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间'",
             'updated_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '修改时间'",
         ]);
-        $this->createIndex('name', $tableName, 'name');
+        $this->createIndex('name', $tableName, 'name', true);
         $this->createIndex('status', $tableName, ['status', 'id']);
 
         //标签数据表

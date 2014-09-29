@@ -34,14 +34,20 @@ $isTopic = !$model->tid;
             <?php endif ?>
         </div>
         <div class="topic-main">
-            <div class="topic-content"><?= Markdown::process($model->content, 'gfm') ?></div>
+            <div class="topic-content mb15"><?= Markdown::process($model->content, 'gfm') ?></div>
+        <?php if ($isTopic) : ?>
+            <div class="topic-tags">
+            <?php foreach($model->tags as $tag): ?>
+                <span class="label label-success"><?= $tag->name ?></span>
+            <?php endforeach ?>
+            </div>
+        <?php endif ?>
             <div class="topic-author">
                 <table>
                     <tbody>
                     <tr>
                         <td rowspan="2">
-                            <?=
-                            Html::a(Html::img($model->author->getAvatarUrl(), ['class' => 'avatar-sm']), ['topic/view', 'id' => $model->id], [
+                            <?= Html::a(Html::img($model->author->getAvatarUrl(), ['class' => 'avatar-sm']), ['topic/view', 'id' => $model->id], [
                                 'title' => Html::encode($model->author->username),
                             ]) ?>
                         </td>

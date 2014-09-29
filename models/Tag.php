@@ -27,6 +27,7 @@ class Tag extends ActiveRecord
     {
         return [
             [['name'], 'required'],
+            [['name'], 'unique'],
             [['description'], 'default', 'value' => ''],
         ];
     }
@@ -53,5 +54,9 @@ class Tag extends ActiveRecord
     {
         $this->status != static::STATUS_ACTIVE && $this->updateAttributes(['status' => static::STATUS_ACTIVE]);
         return true;
+    }
+
+    public function getTagItems()
+    {
     }
 }
