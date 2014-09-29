@@ -9,7 +9,7 @@ class Connection extends \yii\db\Connection
     public function createCommand($sql = null, $params = [])
     {
         $this->open();
-        $command = new Command([ // Ê¹ÓÃÁË¼Ì³ÐÁËÖ®ºóµÄCommandÀà..
+        $command = new Command([ // ä½¿ç”¨äº†ç»§æ‰¿äº†ä¹‹åŽçš„Commandç±»..
             'db' => $this,
             'sql' => $sql,
         ]);
