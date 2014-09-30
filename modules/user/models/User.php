@@ -196,7 +196,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'username' => '用户名',
-            ''
         ];
     }
 
@@ -217,6 +216,12 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $avatar = $this->avatar;
         return $avatar ? $avatar->getUrl() : Avatar::getDefaultUrl();
+    }
+
+    public function getProfile()
+    {
+        return $this->hasMany(Profile::className(), ['uid' => 'id'])
+            ->andWhere(['target_type' => Profile::TYPE]);
     }
 
     /**

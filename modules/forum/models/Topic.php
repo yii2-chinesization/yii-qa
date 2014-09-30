@@ -72,12 +72,12 @@ class Topic extends ActiveRecord
     }
 
     /**
-     * 获取帖子标签
+     * 获取帖子标签(关联tag_item表)
      * @return mixed
      */
     public function getTags()
     {
-        return $this->hasMany(Tag::className(), ['id' => 'id'])
+        return $this->hasMany(Tag::className(), ['id' => 'tid'])
             ->viaTable(TagItem::tableName(), ['target_id' => 'id'], function($model) {
                 $model->andWhere(['target_type' => static::TYPE]);
             });

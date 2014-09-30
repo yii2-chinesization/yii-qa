@@ -62,19 +62,12 @@ class TopicController extends Controller
      */
     public function actionView($id)
     {
-        $with = [
-            'hate',
-            'like',
-            'favorite',
-            'author',
-            'author.avatar'
-        ];
-        $model = $this->findModel($id, 'topic', function ($model) use ($with){
-            $model->with(array_merge($with, ['tags']));
+        $model = $this->findModel($id, 'topic', function ($model) {
+            $model->active();
         });
         $request = Yii::$app->request;
         $commentDataProvider = (new CommentSearch())->search($request->queryParams, $model->getComments());
-        $commentDataProvider->query->with($with)->active();
+        $commentDataProvider->query->with(['hate', 'like', 'favorite', 'author', 'author.avatar'])->active();
         return $this->render('view', [
             'model' => $model,
             'comment' => $this->newComment($model),
@@ -89,7 +82,9 @@ class TopicController extends Controller
     public function actionApi()
     {
         $request = Yii::$app->request;
-        $model = $this->findModel($request->post('id'), $request->post('type'));
+        $model = $this->findModel($request->post('id'), $request->post('type'), function ($model) {
+            $model->active();
+        });
         $opeartions = ['favorite', 'like', 'hate'];
         if (!in_array($do = $request->post('do'), $opeartions)) {
             return $this->message('错误的操作', 'error');

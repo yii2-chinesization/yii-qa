@@ -2,6 +2,10 @@
     width: 40px;
     height: 40px;
 }
+.avatar-xl {
+    width: 128px;
+    height: 128px;
+}
 .avatar-sm {
     width: 32px;
     height: 32px;

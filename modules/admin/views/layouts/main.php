@@ -62,7 +62,7 @@ $identity = $user->getIdentity();
                         <li class="user-footer">
                             <div class="pull-left">
                                 <?=
-                                Html::a('个人中心', $user->homeUrl, [
+                                Html::a('个人中心', ['/user/home/index', 'id' => $user->id], [
                                     'class' => 'btn btn-default btn-flat'
                                 ]) ?>
                             </div>

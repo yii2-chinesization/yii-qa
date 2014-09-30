@@ -5,6 +5,7 @@ return [
     'signout' => '/user/default/logout',
     'auth' => '/user/default/auth',
     'reset-password' => '/user/default/resetPassword',
+    'user/<id>' => '/user/home/index',
 
 
     //标签rest

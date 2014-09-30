@@ -6,7 +6,6 @@ use yii\db\Expression;
 
 class User extends \yii\web\User
 {
-    public $homeUrl = ['/user/home'];
     public $loginUrl = ['/user/default/login'];
     public $logoutUrl = ['/user/default/logout'];
     public $registerUrl = ['/user/default/register'];

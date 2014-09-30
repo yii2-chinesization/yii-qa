@@ -52,7 +52,7 @@ $isTopic = !$model->tid;
                             ]) ?>
                         </td>
                         <td>
-                            <h5><?= Html::a(Html::encode($model->author->username), ['topic/view', 'id' => $model->id]) ?></h5>
+                            <h5><?= Html::a(Html::encode($model->author->username), ['/user/home/index', 'id' => $model->author->id]) ?></h5>
                         </td>
                     </tr>
                     <tr>

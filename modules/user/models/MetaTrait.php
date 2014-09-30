@@ -20,7 +20,7 @@ trait MetaTrait
         return [
             [['type'], 'default', 'value' => static::TYPE],
             [['value'], 'default', 'value' => 1],
-            [['uid', 'target_id', 'target_type', 'type', 'value'], 'required']
+            [['uid', 'target_type', 'type', 'value'], 'required']
         ];
     }
 

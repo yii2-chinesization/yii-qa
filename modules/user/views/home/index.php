@@ -1,17 +1,39 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\modules\user\assets\UserAsset;
+UserAsset::register($this);
 
 $identity = Yii::$app->getUser()->getIdentity();
 $this->title = $identity->username;
-$this->registerCssFile('@web/css/user.css', 'app\assets\AppAsset');
 ?>
-<div class="container-fluid pt25">
+<div class="container-fluid">
+    <h3><?= Html::encode($identity->username) ?> <small>@<?= Html::encode($identity->username) ?></small></h3>
+    <div class="user-profile">
+        <div class="user-avatar">
+            <?= Html::img($identity->getAvatarUrl(), ['class' => 'avatar-xl']) ?>
+        </div>
+        <div class="user-info">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <span class="thumbnail">
+                <?= Html::img($identity->getAvatarUrl()) ?>
+            </span>
+        </div>
+        <div class="col-sm-9">
+            <span class="thumbnail">
+                <?= Html::img($identity->getAvatarUrl()) ?>
+            </span>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-2 col-md-3 col-sm-3">
             <div id="userAvatar">
                 <div class="thumbnail">
-                    <?= Html::img($identity->getDefaultAvatarUrl()) ?>
+                    <?= Html::img($identity->getAvatarUrl()) ?>
                 </div>
                 <div class="file-input text-center">
                     <span class="avatar-upload-text"> 点击修改头像 </span>
@@ -36,32 +58,7 @@ $this->registerCssFile('@web/css/user.css', 'app\assets\AppAsset');
             </ul>
         </div>
         <div class="col-lg-10 col-md-9">
-            <div id="userAlbums" class="clearfix">
-                <?php foreach ($identity->albums as $aid => $album): ?>
-                    <dl class="thumbnail">
-                        <dt class="clearfix">
-                            <?php foreach ($album->getPictures()->limit(9)->each() as $picture): ?>
-                                <a href="javascript:;"><img class="img-rounded" src="<?= $picture->getUrl() ?>"/></a>
-                            <?php endforeach ?>
-                        </dt>
-                        <dd class="caption">
-                            <h4 class="text-center"><?= Html::encode($album->name) ?></h4>
 
-                            <p><?= Html::encode($album->description) ?></p>
-
-                            <div class="clearfix text-muted">
-                                <small class="pull-left">
-                                    <span>10张图片</span>
-                                </small>
-                                <small class="pull-right">
-                                    <span>10人觉得赞</span>
-                                    <span>5个评论</span>
-                                </small>
-                            </div>
-                        </dd>
-                    </dl>
-                <?php endforeach ?>
-            </div>
         </div>
     </div>
 </div>

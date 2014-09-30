@@ -59,7 +59,7 @@ class TopMenu extends Widget
                     'items' => [
                         [
                             'label' => '<span class="glyphicon glyphicon-home"></span> 个人中心',
-                            'url' => $user->homeUrl
+                            'url' => ['/user/home/index', 'id' => $user->id]
                         ],
                         [
                             'label' => '<span class="glyphicon glyphicon-user"></span> 后台管理',

@@ -21,15 +21,8 @@ class m140910_100200_initUserTable extends Migration
             'auth_key' => Schema::TYPE_STRING . "(32) NOT NULL COMMENT '加密秘钥'",
             'password_hash' => Schema::TYPE_STRING . " NOT NULL COMMENT 'hash密码'",
             'password_reset_token' => Schema::TYPE_STRING . " NOT NULL DEFAULT '' COMMENT '密码重置秘钥'",
-
-            'followers' => Schema::TYPE_SMALLINT . "(6) UNSIGNED NOT NULL DEFAULT '0' COMMENT '粉丝数'",
-            'following' => Schema::TYPE_SMALLINT . "(6) UNSIGNED NOT NULL DEFAULT '0' COMMENT '关注数'",
-            'photos' => Schema::TYPE_SMALLINT . "(6) UNSIGNED NOT NULL DEFAULT '0' COMMENT '图片数'",
-
             'avatar_sid' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '头像storage id'",
-
             'status' => Schema::TYPE_BOOLEAN . ' NOT NULL DEFAULT 10',
-
             'last_login_ip' => Schema::TYPE_STRING . "(32) NOT NULL DEFAULT '' COMMENT '最后登录IP'",
             'last_visit_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '最后访问时间'",
             'created_at' => Schema::TYPE_INTEGER . " UNSIGNED NOT NULL DEFAULT '0' COMMENT '创建时间'",
@@ -56,7 +49,7 @@ class m140910_100200_initUserTable extends Migration
         $this->createIndex('status', $tableName, ['status', 'uid']);
         $this->createIndex('default', $tableName, ['default', 'status', 'uid']);
 
-        //用户操作数据表 (收藏, 赞, 踩...) 数据保存
+        //用户操作数据表 (收藏, 赞, 踩等元数据...) 数据保存
         $tableName = Meta::tableName();
         $this->createTable($tableName, [
             'id' => Schema::TYPE_PK,

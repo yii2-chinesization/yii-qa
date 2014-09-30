@@ -55,25 +55,15 @@ $script = <<<EOF
         topicEditor = new Markdown.Editor(topicConverter);
     topicEditor.run();
     $('#topicTags').selectize({
-        valueField: 'id',
+        valueField: 'name',
         labelField: 'name',
         searchField: 'name',
         plugins: ['remove_button'],
         maxItems: 5,
         persist: false,
         create: true,
-        createFilter: function(query) {
-            var _return = true;
-            if (query) {
-                var _this = this;
-                $.each(_this.options, function(n, item) {
-                    var a = item[_this.settings.searchField];
-                    if (_return != false && item[_this.settings.searchField] == query) {
-                        _return = false;
-                    }
-                });
-            }
-            return _return;
+        createFilter: function(value) {
+            return !this.options.hasOwnProperty(value);
         },
         render: {
             option: function(item, escape) {
@@ -97,28 +87,27 @@ $script = <<<EOF
                 }
             });
         },
-        onItemAdd: function (value, item) {
-            var _this = this;
-            $.ajax({
-                url: ('{$tagCreateApiUrl}'),
-                type: 'POST',
-                data: {
-                    Tag: {
-                        name: value
-                    }
-                },
-                error: function() {
-                },
-                success: function(res) {
-                    if (res.type != 'success') {
-                        alert(res.message);
-                        if (res.type == 'error') {
-                            _this.removeOption(value);
+        onOptionAdd: function (value, data) {
+            if (!data.hasOwnProperty('id')) {
+                var _this = this;
+                $.ajax({
+                    url: ('{$tagCreateApiUrl}'),
+                    type: 'POST',
+                    data: {
+                        Tag: {
+                            name: value
+                        }
+                    },
+                    success: function(res) {
+                        if (res.type != 'success') {
+                            alert(res.message);
+                            if (res.type == 'error') {
+                                _this.removeOption(value);
+                            }
                         }
                     }
-                }
-            });
-
+                });
+            }
         }
     });
 EOF;

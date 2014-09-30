@@ -192,14 +192,14 @@ class DefaultController extends Controller
         if ($model->load($request->post())) {
             $model->author_id = Yii::$app->user->id;
             if ($forum->addTopic($model, true)) {
-                if ($tagId = $request->post('tags')) {
+                if ($tags = $request->post('tags')) {
                     $tags = Tag::find()->where([
-                        'name' => explode(',', $tagId)
+                        'name' => explode(',', $tags)
                     ])->active()->all();
                     $model->addTags($tags);
                 }
                 $this->flash('发表话题成功!', 'success');
-                Yii::$app->end(0, $this->redirect(['topic/view', 'id' => $model->id]));
+                return Yii::$app->end(0, $this->redirect(['topic/view', 'id' => $model->id]));
             }
         }
         return $model;

@@ -26,7 +26,7 @@ AppAsset::register($this);
         <?php
         NavBar::begin([
             'brandLabel' => Yii::$app->name,
-            'brandUrl' => Yii::$app->homeUrl,
+            'brandUrl' => ['/user/home/index', 'id' => Yii::$app->user->id],
             'options' => [
                 'class' => 'navbar-white',
             ],
