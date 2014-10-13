@@ -24,7 +24,7 @@ Yii-QA 简介
 开启命令行切换到程序根目录并依次运行以下两条命令：
 
 ```console
- composer global require "fxp/composer-asset-plugin:1.0.*@dev"
+ composer global require "fxp/composer-asset-plugin:1.0.0-beta3"
  composer create-project --prefer-dist --stability=dev yii2-chinesization/yii-qa yii-qa
 ```
 
