@@ -11,6 +11,7 @@ $config = [
     'bootstrap' => ['log'],
     'extensions' => require(__DIR__ . '/../vendor/yiisoft/extensions.php'),
     'modules' => require(__DIR__ . '/modules.php'),
+    'defaultRoute' => 'forum',
     'components' => [
         'request' => [
             'cookieValidationKey' => 'callmez',

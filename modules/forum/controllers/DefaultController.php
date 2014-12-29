@@ -49,10 +49,19 @@ class DefaultController extends Controller
     }
 
     /**
-     * 版块列表
+     * 版块首页
      * @return string
      */
     public function actionIndex()
+    {
+        return $this->actionView(null);
+    }
+
+    /**
+     * 版块列表
+     * @return string
+     */
+    public function actionList()
     {
         $searchModel = new ForumSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -70,8 +79,8 @@ class DefaultController extends Controller
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
-        $topicDataProvider = (new TopicSearch())->search(Yii::$app->request->queryParams, $model->getTopics()->active());
+        $model = $id === null ? null : $this->findModel($id);
+        $topicDataProvider = (new TopicSearch())->search(Yii::$app->request->queryParams);
         $topicDataProvider->getSort()->attributes += [ // 增加(热门, 未评论)排序方式
             'hotest' => [
                 'asc' => [
