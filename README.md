@@ -1,4 +1,4 @@
-Yii-QA 简介
+Yii-QA 简介(此项目目前已不再维护)
 ===========
 
 感谢选择 Yii-QA，基于 [Yii2](https://github.com/yiisoft/yii2) 框架基础实现的问答程序。
