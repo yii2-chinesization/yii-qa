@@ -50,13 +50,13 @@ $identity = $user->getIdentity();
                         </li>
                         <li class="user-body">
                             <div class="col-xs-4 text-center">
-                                <strong><?= $identity->following ?></strong> 关注
+                                <strong><? //= $identity->following ?></strong> 关注
                             </div>
                             <div class="col-xs-4 text-center">
-                                <strong><?= $identity->followers ?></strong> 粉丝
+                                <strong><? //= $identity->followers ?></strong> 粉丝
                             </div>
                             <div class="col-xs-4 text-center">
-                                <strong><?= $identity->photos ?></strong> 图片
+                                <strong><? //= $identity->photos ?></strong> 图片
                             </div>
                         </li>
                         <li class="user-footer">

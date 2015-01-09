@@ -41,9 +41,9 @@ $this->title = $identity->username;
                 </div>
             </div>
             <div id="userInfo" class="clearfix">
-                <a href="javascript:;"><strong><?= $identity->following ?></strong> 关注</a>
-                <a href="javascript:;"><strong><?= $identity->followers ?></strong> 粉丝</a>
-                <a href="javascript:;"><strong><?= $identity->photos ?></strong> 图片</a>
+                <a href="javascript:;"><strong><? //= $identity->following ?></strong> 关注</a>
+                <a href="javascript:;"><strong><? //= $identity->followers ?></strong> 粉丝</a>
+                <a href="javascript:;"><strong><? //= $identity->photos ?></strong> 图片</a>
             </div>
             <ul id="userProfile" class="list-unstyled">
                 <li>
