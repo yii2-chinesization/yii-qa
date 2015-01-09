@@ -1,7 +1,21 @@
-Yii-QA 简介
+Yii-QA 简介(此项目目前已不再维护)
 ===========
 
 感谢选择 Yii-QA，基于 [Yii2](https://github.com/yiisoft/yii2) 框架基础实现的问答程序。
+
+
+
+
+
+
+#鉴于目前的业余时间有限,无法管理太多的业余项目, 我准备合并目前手上的项目, 集成在一个项目中, 感谢支持!!!!!!!
+
+请关注: [画卷](https://github.com/callmez/huajuan)
+
+
+
+
+
 
 
 环境条件
@@ -24,7 +38,7 @@ Yii-QA 简介
 开启命令行切换到程序根目录并依次运行以下两条命令：
 
 ```console
- composer global require "fxp/composer-asset-plugin:1.0.0-beta2"
+ composer global require "fxp/composer-asset-plugin:1.0.0-beta3"
  composer create-project --prefer-dist --stability=dev yii2-chinesization/yii-qa yii-qa
 ```
 
@@ -51,8 +65,8 @@ Password:
 ------------
 
 安装步骤如下：
-- 【可选项】在您的数据库系统中新建一个数据库
-- 重命名 `protected/config/db-default.php` 文件 为 `db.php`，依据您的数据库配置相应地修改该文件。（请确认数据库已存在）
+- 在您的数据库系统中新建一个数据库(若已有，可跳过)
+- 重命名 `config/db-default.php` 文件 为 `db.php`，依据您的数据库配置相应地修改该文件。（请确认数据库已存在）
 - 打开命令行工具 -> 切换到程序根目录
 - 在程序根目录中执行 ``php yii migrate`` 执行数据迁移命令导入数据结构
 

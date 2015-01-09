@@ -49,15 +49,7 @@ $identity = $user->getIdentity();
                             </p>
                         </li>
                         <li class="user-body">
-                            <div class="col-xs-4 text-center">
-                                <strong><? //= $identity->following ?></strong> 关注
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <strong><? //= $identity->followers ?></strong> 粉丝
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <strong><? //= $identity->photos ?></strong> 图片
-                            </div>
+
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
